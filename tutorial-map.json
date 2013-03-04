@@ -1,0 +1,624 @@
+{
+    "zerk": "map",
+    "version": "1",
+    "about": {
+        "title": "Zerk Tutorial",
+        "author": "Greg M. Krsak",
+        "version": "uat-gam104o-rev1"
+    },
+    "rooms": [
+              {
+              "id": "outside_001",
+              "type": "OutsideEntry",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "s",
+              "exit_s": "room_005",
+              "on_entry": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 10); self.nounWithId('${SOURCE_NOUN_ID}')['game_state'] = 'finished_won'",
+              "obvious_nouns": [],
+              "requires_nouns": [
+                                 "key_001"
+                                 ]
+              },
+              {
+              "id": "room_001",
+              "type": "Bedroom",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "d",
+              "exit_d": "room_002",
+              "on_entry": "",
+              "obvious_nouns": [
+                                "misc_001",
+                                "misc_002",
+                                "player_001"
+                                ],
+              "requires_nouns": []
+              },
+              {
+              "id": "room_002",
+              "type": "LivingRoom",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "u,n",
+              "exit_u": "room_001",
+              "exit_n": "room_003",
+              "on_entry": "",
+              "obvious_nouns": [ ],
+              "requires_nouns": []
+              },
+              {
+              "id": "room_003",
+              "type": "Kitchen",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "s,w",
+              "exit_s": "room_002",
+              "exit_w": "room_004",
+              "on_entry": "",
+              "obvious_nouns": [
+                                "weapon_001",
+                                "light_001"
+                                ],
+              "requires_nouns": []
+              },
+              {
+              "id": "room_004",
+              "type": "EastHall",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "e,w",
+              "exit_e": "room_003",
+              "exit_w": "room_005",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id": "room_005",
+              "type": "EntryHall",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "n,e,w",
+              "exit_n": "outside_001",
+              "exit_e": "room_004",
+              "exit_w": "room_006",
+              "on_entry": "",
+              "obvious_nouns": [
+                                "misc_003"
+                                ],
+              "requires_nouns": []
+              },
+              {
+              "id": "room_006",
+              "type": "WestHall",
+              "always_lit": "true",
+              "lit": "true",
+              "obvious_exits": "e,d",
+              "exit_e": "room_005",
+              "exit_d": "basement_001",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"basement_001",
+              "type":"BasementEntry",
+              "always_lit":"true",
+              "lit": "true",
+              "obvious_exits": "s,u",
+              "exit_s": "basement_002",
+              "exit_u": "room_006",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"basement_002",
+              "type":"Basement",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,w",
+              "exit_n": "basement_001",
+              "exit_w": "basement_003",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"basement_003",
+              "type":"Basement",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "s,e",
+              "exit_s": "basement_004",
+              "exit_e": "basement_002",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"basement_004",
+              "type":"DungeonEntrance",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,s",
+              "exit_n": "basement_003",
+              "exit_s": "dungeon_001",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_001",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,e,w",
+              "exit_n": "basement_004",
+              "exit_e": "dungeon_009",
+              "exit_w": "dungeon_002",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_002",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "s,e",
+              "exit_s": "dungeon_003",
+              "exit_e": "dungeon_001",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_003",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,s,w",
+              "exit_n": "dungeon_002",
+              "exit_s": "dungeon_005",
+              "exit_w": "dungeon_004",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_004",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "e",
+              "exit_e": "dungeon_003",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_005",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,e",
+              "exit_n": "dungeon_003",
+              "exit_e": "dungeon_006",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_006",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "e,w",
+              "exit_e": "dungeon_007",
+              "exit_w": "dungeon_005",
+              "on_entry": "",
+              "obvious_nouns": [ "player_002" ],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_007",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,w",
+              "exit_n": "dungeon_008",
+              "exit_w": "dungeon_006",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_008",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "n,s",
+              "exit_n": "dungeon_009",
+              "exit_s": "dungeon_007",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_009",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "s,e,w",
+              "exit_s": "dungeon_008",
+              "exit_e": "dungeon_010",
+              "exit_w": "dungeon_001",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              },
+              {
+              "id":"dungeon_010",
+              "type":"Dungeon",
+              "always_lit":"false",
+              "lit": "false",
+              "obvious_exits": "w",
+              "exit_w": "dungeon_009",
+              "on_entry": "",
+              "obvious_nouns": [],
+              "requires_nouns": []
+              }
+              ],
+    "room_types": [
+                   {
+                   "id": "OutsideEntry",
+                   "short_desc": "Front Porch",
+                   "long_desc": "Blowing snow assaults your morale as you attempt to stay warm on the front porch of a large building. It looks as if the residence was constructed methodically, in the middle of an evergreen forest, with no obvious roads in sight. Well, at least you don't feel trapped inside of that silly house anymore. That silly, warm house. Ah, what fun it was."
+                   },
+                   {
+                   "id": "EntryHall",
+                   "short_desc": "Entry Hall",
+                   "long_desc": "You are standing in front of a large, stone fireplace, inside what appears to be a well-constructed wooden dwelling. Outside, snow blows diagonally across foggy windows, and visibility is limited. You aren't sure what to do here; it's almost as if you're standing in front of this fireplace for no apparent reason. A hallway stretches to the east and west, and a northern door leads out and into the brutal cold. The door's knob is of a design that requires a key in order to operate."
+                   },
+                   {
+                   "id": "EastHall",
+                   "short_desc": "East Hallway",
+                   "long_desc": "This part of the hallway is near the fireplace; although you can't quite see it from here, you can smell the faint aroma of damp, blackened firewood. Or, what's left of it. The hallway continues to the east and west."
+                   },
+                   {
+                   "id": "WestHall",
+                   "short_desc": "West Hallway",
+                   "long_desc": "This is the west end of a long hallway that stretches to the east. A hole in the floor appears to have been created with some sort of demolition tool, as if someone really wanted to see what was below. Or... really wanted to escape from below. A steady, musty stench blows upward, assaulting your remaining sense of decency. If you really wanted to, you might be able to squeeze through the opening."
+                   },
+                   {
+                   "id": "Kitchen",
+                   "short_desc": "Looted Kitchen",
+                   "long_desc": "A mostly-empty kitchen, probably picked clean by transients at some point in the recent past. There is a faint covering of dust atop most of the surfaces. From the looks of it, all of the appliances have been removed; whether stolen for scrap, or simply because no one has occupied this building in quite some time, you can't be certain. Windows to the outside reveal a gathering snowstorm, making you feel glad you're inside. A hallway stretches to the west. A quick glance south, toward the bare living room, makes you question the motives, past and present, of the dwelling's owners."
+                   },
+                   {
+                   "id": "LivingRoom",
+                   "short_desc": "Living Room",
+                   "long_desc": "You're standing still, in the middle of a bare living room, as if in awe of what took place here. The sad remains of picture hangings remain attached to the wall, and the carpet below your feet is completely ruined, with clear markings of where a couch was once proudly placed. To the north, you see the kitchen. A ladder leads upwards to a small, yet dusty loft."
+                   },
+                   {
+                   "id": "Bedroom",
+                   "short_desc": "Small Loft",
+                   "long_desc": "Clearly, this is a bedroom for someone. Perhaps you, if you could remember anything. Urine stains the plywood-covered insulation floor, as if the person who recently slept here was too lazy to find a bathroom. Medium-sized balls of dust wasp gently across the floor as you shift on your feet, crouched to avoid the low ceiling. A ladder leads downward, to what appears to be the building's main floor."
+                   },
+                   {
+                   "id":"BasementEntry",
+                   "short_desc":"Underneath West Hallway",
+                   "long_desc":"This is a dark and scary space; there is barely enough light to see. There is a large hole in the ceiling above you, and the basement proper appears to stretch further to the south."
+                   },
+                   {
+                   "id":"Basement",
+                   "short_desc":"Basement",
+                   "long_desc":"A lonely, concrete basement. Your lantern barely puts out enough light for you to see."
+                   },
+                   {
+                   "id":"DungeonEntrance",
+                   "short_desc":"Basement",
+                   "long_desc":"This is where the basement stops, and scary starts. Your eyes strain in the dim light of your lantern, and then you see it: To your horror, what appears to be a dungeon stretches endlessly to the south. You definitely don't want to go in there."
+                   },
+                   {
+                   "id":"Dungeon",
+                   "short_desc":"Terrifying Dungeon",
+                   "long_desc":"You aren't even paying attention to your surroundings. You're just trying to stay alive."
+                   }
+                   ],
+    "nouns": [
+              {
+              "id": "light_001",
+              "active": "true",
+              "playable": "false",
+              "switchable": "true",
+              "mortal": "false",
+              "big": "false",
+              "weapon": "false",
+              "on": "false",
+              "short_desc": "lantern",
+              "long_desc": "This 12 volt Eveready is always ready.",
+              "before_each_turn": "for room in (self.roomsContainingNounWithId('light_001')): self.setLitInRoomWithId(room['id'], False) if (self.nounWithId('light_001')['on'] == 'false') and (room['always_lit'] == 'false') else self.setLitInRoomWithId(room['id'], True)",
+              "after_each_turn": "",
+              "on_take": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 5)",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": [
+                                "take",
+                                "drop",
+                                "use"
+                                ]
+              },
+              {
+              "id": "key_001",
+              "active": "true",
+              "playable": "false",
+              "switchable": "false",
+              "mortal": "false",
+              "big": "false",
+              "weapon": "false",
+              "short_desc": "key",
+              "long_desc": "An old skeleton key, covered in dust.",
+              "before_each_turn": "",
+              "after_each_turn": "",
+              "on_take": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 5)",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": [
+                                "take",
+                                "drop"
+                                ]
+              },
+              {
+              "id": "weapon_001",
+              "active": "true",
+              "playable": "false",
+              "switchable": "false",
+              "mortal": "false",
+              "big": "false",
+              "weapon": "true",
+              "short_desc": "knife",
+              "long_desc": "This knife has seen better days. It is probably sharp enough to butter a piece of bread.",
+              "before_each_turn": "",
+              "after_each_turn": "",
+              "on_take": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 5)",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": [
+                                "take",
+                                "drop"
+                                ]
+              },
+              {
+              "id": "player_001",
+              "active": "false",
+              "playable": "true",
+              "connected": "false",
+              "game_state": "quit",
+              "turns_taken": "0",
+              "turns_allowed": "100",
+              "score": "0",
+              "notifications": [],
+              "switchable": "false",
+              "mortal": "true",
+              "alive": "true",
+              "big": "true",
+              "weapon": "false",
+              "afraid_of": [ "player_002" ],
+              "short_desc": "player",
+              "long_desc": "Hey, hey, so a little weight could be lost. Don't judge.",
+              "before_each_turn": "",
+              "after_each_turn": "",
+              "on_take": "",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": []
+              },
+              {
+              "id": "player_002",
+              "active": "true",
+              "playable": "false",
+              "connected": "false",
+              "game_state": "playing",
+              "turns_taken": "0",
+              "turns_allowed": "100",
+              "score": "0",
+              "notifications": [],
+              "switchable": "false",
+              "mortal": "true",
+              "alive": "true",
+              "big": "true",
+              "weapon": "false",
+              "afraid_of": [ "player_001" ],
+              "short_desc": "thief",
+              "long_desc": "You look into the thief's eyes, and the thief looks right back into yours.",
+              "before_each_turn": "if (self.nounWithId('player_002')['alive'] == 'true') and (self.nounWithId('player_002')['connected'] == 'false'): self.moveNounWithIdRandomly('player_002')",
+              "after_each_turn": "if self.roomsContainingNounWithId('player_002')[0]['type'] == 'OutsideEntry': self.sendNotificationToNoun('The thief made it outside before you did. You\\'re all alone, now; locked inside this house. The sheer magnitude of this realization causes you to have a massive heart attack. After all, he had the only key...', self.nounWithId('player_001')); self.nounWithId('player_001')['game_state'] = 'finished_lost'",
+              "on_take": "",
+              "on_drop": "",
+              "on_death": "self.sendNotificationToNoun('Mortally wounded, the thief collapses in a sad heap. As he falls, you hear the faint sound of a metal object striking a hard surface.', self.nounWithId('${SOURCE_NOUN_ID}')); self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 5); self.removeNounWithIdFromInventoryOfNounWithId('key_001', 'player_002'); self.addNounWithIdToRoomWithId('key_001', self.roomsContainingNounWithId('player_002')[0]['id']); self.nounWithId('player_002')['long_desc'] = 'The bloody remains of a mostly-unknown criminal. You wonder if his family will miss him...\\n...and then you wonder if your family will miss you.';",
+              "inventory": [ "key_001" ],
+              "allowed_verbs": [
+                                "kill",
+                                "flee"
+                                ]
+              },
+              {
+              "id": "misc_001",
+              "active": "true",
+              "playable": "false",
+              "switchable": "false",
+              "mortal": "false",
+              "big": "false",
+              "weapon": "false",
+              "short_desc": "pillow",
+              "long_desc": "A simple pillow, stuffed with fluff.",
+              "before_each_turn": "",
+              "after_each_turn": "",
+              "on_take": "",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": [
+                                "take",
+                                "drop"
+                                ]
+              },
+              {
+              "id": "misc_002",
+              "active": "true",
+              "playable": "false",
+              "switchable": "false",
+              "mortal": "false",
+              "big": "false",
+              "weapon": "false",
+              "short_desc": "blanket",
+              "long_desc": "This tattered blanket has seen many cold, terrified, sleepless evenings. Or, at least, that's the way it smells.",
+              "before_each_turn": "",
+              "after_each_turn": "",
+              "on_take": "",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": [
+                                "take",
+                                "drop"
+                                ]
+              },
+              {
+              "id": "misc_003",
+              "active": "true",
+              "playable": "false",
+              "switchable": "false",
+              "mortal": "false",
+              "big": "true",
+              "weapon": "false",
+              "short_desc": "fireplace",
+              "long_desc": "This fireplace is actually kind of cool. Not that it looks cool... It is, simply, not hot.",
+              "before_each_turn": "",
+              "after_each_turn": "",
+              "on_take": "",
+              "on_drop": "",
+              "inventory": [],
+              "allowed_verbs": []
+              }
+              ],
+    "verbs": [
+              {
+              "id": "north",
+              "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'n')",
+              "synonyms": [
+                           "n"
+                           ]
+              },
+              {
+              "id": "south",
+              "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 's')",
+              "synonyms": [
+                           "s"
+                           ]
+              },
+              {
+              "id": "east",
+              "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'e')",
+              "synonyms": [
+                           "e"
+                           ]
+              },
+              {
+              "id": "west",
+              "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'w')",
+              "synonyms": [
+                           "w"
+                           ]
+              },
+              {
+              "id": "up",
+              "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'u')",
+              "synonyms": [
+                           "u"
+                           ]
+              },
+              {
+              "id": "down",
+              "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'd')",
+              "synonyms": [
+                           "d"
+                           ]
+              },
+              {
+              "id": "take",
+              "immediately": "self.addNounWithIdToInventoryOfNounWithId('${TARGET_NOUN_ID}', '${SOURCE_NOUN_ID}'); self.removeNounWithIdFromRoomWithId('${TARGET_NOUN_ID}', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id']) if self.nounWithId('${TARGET_NOUN_ID}')['big'] == 'false' else self.sendNotificationToNoun('You can\\'t pick that up!', self.nounWithId('${SOURCE_NOUN_ID}'))",
+              "synonyms": [
+                           "get",
+                           "grab",
+                           "acquire",
+                           "hold"
+                           ]
+              },
+              {
+              "id": "drop",
+              "immediately": "self.removeNounWithIdFromInventoryOfNounWithId('${TARGET_NOUN_ID}', '${SOURCE_NOUN_ID}'); self.addNounWithIdToRoomWithId('${TARGET_NOUN_ID}', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id'])",
+              "synonyms": [
+                           "dump",
+                           "throw",
+                           "toss"
+                           ]
+              },
+              {
+              "id": "use",
+              "immediately": "self.switchNounWithId('${TARGET_NOUN_ID}')",
+              "synonyms": [
+                           "activate",
+                           "switch"
+                           ]
+              },
+              {
+              "id": "kill",
+              "immediately": "self.attackNounStringFromNounWithId('${TARGET_NOUN_STRING}', '${SOURCE_NOUN_ID}')",
+              "synonyms": [
+                           "destroy",
+                           "fight",
+                           "attack"
+                           ]
+              },
+              {
+              "id": "flee",
+              "immediately": "",
+              "synonyms": [
+                           "run",
+                           "retreat",
+                           "escape",
+                           "panic"
+                           ]
+              },
+              {
+              "id": "inventory",
+              "immediately": "for itemId in (self.nounWithId('${SOURCE_NOUN_ID}')['inventory']): self.sendNotificationToNoun(self.nounWithId(itemId)['short_desc'], self.nounWithId('${SOURCE_NOUN_ID}'))",
+              "synonyms": [
+                           "items",
+                           "list"
+                           ]
+              },
+              {
+              "id": "look",
+              "immediately": "self.lookAtNounStringFromNounWithId('${TARGET_NOUN_STRING}', '${SOURCE_NOUN_ID}')",
+              "synonyms": [
+                           "view",
+                           "notice",
+                           "observe",
+                           "glance",
+                           "stare"
+                           ]
+              },
+              {
+              "id": "quit",
+              "immediately": "self.nounWithId('${SOURCE_NOUN_ID}')['game_state'] = 'quitting'",
+              "synonyms": [
+                           "exit",
+                           "leave",
+                           "bye"
+                           ]
+              }
+              ]
+}

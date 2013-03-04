@@ -1,0 +1,180 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		ADECEEB916D6F3EA0079F486 /* __init__.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		ADECEEBA16D6F3EA0079F486 /* zerk_mvc_tests.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = zerk_mvc_tests.py; sourceTree = "<group>"; };
+		ADECEEBB16D6F3EA0079F486 /* ZerkControllerTests.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ZerkControllerTests.py; sourceTree = "<group>"; };
+		ADECEEBC16D6F3EA0079F486 /* ZerkModelTests.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ZerkModelTests.py; sourceTree = "<group>"; };
+		ADECEEBD16D6F3EA0079F486 /* ZerkViewTests.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ZerkViewTests.py; sourceTree = "<group>"; };
+		ADECEEBE16D73ADE0079F486 /* testmap.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testmap.json; sourceTree = "<group>"; };
+		ADECEEBF16D7C6F70079F486 /* ZerkIntegrationTests.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ZerkIntegrationTests.py; sourceTree = "<group>"; };
+		ADECEEC116D92CE00079F486 /* ZerkUserTests.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ZerkUserTests.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		ADECEEAA16D6F2600079F486 = {
+			isa = PBXGroup;
+			children = (
+				ADECEEBE16D73ADE0079F486 /* testmap.json */,
+				ADECEEB916D6F3EA0079F486 /* __init__.py */,
+				ADECEEBA16D6F3EA0079F486 /* zerk_mvc_tests.py */,
+				ADECEEBB16D6F3EA0079F486 /* ZerkControllerTests.py */,
+				ADECEEBC16D6F3EA0079F486 /* ZerkModelTests.py */,
+				ADECEEBD16D6F3EA0079F486 /* ZerkViewTests.py */,
+				ADECEEC116D92CE00079F486 /* ZerkUserTests.py */,
+				ADECEEBF16D7C6F70079F486 /* ZerkIntegrationTests.py */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		ADECEEAF16D6F2600079F486 /* zerk_mvc_tests */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = ADECEEB216D6F2600079F486 /* Build configuration list for PBXLegacyTarget "zerk_mvc_tests" */;
+			buildPhases = (
+			);
+			buildToolPath = /Library/Frameworks/Python.framework/Versions/3.2/bin/python3;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = zerk_mvc_tests;
+			passBuildSettingsInEnvironment = 1;
+			productName = zerk_mvc_tests;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		ADECEEAB16D6F2600079F486 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Greg M. Krsak";
+			};
+			buildConfigurationList = ADECEEAE16D6F2600079F486 /* Build configuration list for PBXProject "zerk_mvc_tests" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ADECEEAA16D6F2600079F486;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADECEEAF16D6F2600079F486 /* zerk_mvc_tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		ADECEEB016D6F2600079F486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		ADECEEB116D6F2600079F486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		ADECEEB316D6F2600079F486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ADECEEB416D6F2600079F486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADECEEAE16D6F2600079F486 /* Build configuration list for PBXProject "zerk_mvc_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADECEEB016D6F2600079F486 /* Debug */,
+				ADECEEB116D6F2600079F486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADECEEB216D6F2600079F486 /* Build configuration list for PBXLegacyTarget "zerk_mvc_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADECEEB316D6F2600079F486 /* Debug */,
+				ADECEEB416D6F2600079F486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADECEEAB16D6F2600079F486 /* Project object */;
+}
