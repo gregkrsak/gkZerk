@@ -13,7 +13,7 @@ You'll need a Python 3 interpreter.
 Once you have that, it's pretty simple:
 
 ```
-./gkzerk.py tutorial-map.json
+gkzerk.py tutorial-map.json
 ```
 
 Make your own maps
@@ -111,7 +111,9 @@ An example of a room object:
 }
 ```
 
-(To learn more about the map design, go ahead and dive into the file tutorial-map.json)
+You've probably noticed that there's some scripting allowed; in-fact, it's required for a reasonably-functioning map! All scripts are Python 3, executed within a server-side instance (shared among all users) of the ZerkModel class. Note that, as of right now, the program is hard-coded to only connect a single, local user. So, you'll be playing by yourself!
+
+To learn more about the map design, go ahead and dive into the file tutorial-map.json!
 
 Additional resources
 --------------------
