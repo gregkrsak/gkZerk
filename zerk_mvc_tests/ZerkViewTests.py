@@ -1,3 +1,14 @@
+# Filename: ZerkViewTests.py
+# Author: Greg M. Krsak
+# License: MIT
+# Contact: greg.krsak@gmail.com
+#
+# Zerk is an Interactive Fiction (IF) style interpreter, inspired by Infocom's
+# Zork series. Zerk allows the use of custom maps, which are JSON-formatted.
+#
+# This file contains the tests for the MVC view.
+#
+
 import unittest
 import io
 
@@ -12,6 +23,10 @@ from zerk_state import ZerkGameState
 
 
 class ZerkViewTests(unittest.TestCase):
+
+    """
+    Tests for the MVC view.
+    """
     
     def setUp(self):
         # Create a mock model instance
@@ -23,6 +38,9 @@ class ZerkViewTests(unittest.TestCase):
     
 
     def test_CanDetermineCorrectIndefiniteArticleForWord(self):
+        """
+        Can select 'a' or 'an' depending on what word is to follow.
+        """
         a = 'a'
         an = 'an'
         words = { a: [ 'sausage', 'taco' ], an: [ 'apple', 'orange' ] }
@@ -33,5 +51,8 @@ class ZerkViewTests(unittest.TestCase):
     
 
     def test_CanShowOutput(self):
+        """
+        Can buffer and display output.
+        """
         self.view.buffer.write('mock output\n')
         self.view.output.write(self.view.buffer.getvalue())
