@@ -1,3 +1,14 @@
+# Filename: ZerkControllerTests.py
+# Author: Greg M. Krsak
+# License: MIT
+# Contact: greg.krsak@gmail.com
+#
+# Zerk is an Interactive Fiction (IF) style interpreter, inspired by Infocom's
+# Zork series. Zerk allows the use of custom maps, which are JSON-formatted.
+#
+# This file contains the tests for the MVC controller.
+#
+
 import unittest
 import io
 
@@ -7,14 +18,15 @@ import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 from zerk_mvc.ZerkModel import ZerkModel
-from zerk_mvc.ZerkView import ZerkView
 from zerk_mvc.ZerkController import ZerkController
-from zerk_mvc.ZerkUser import ZerkUser
-from zerk_state import ZerkGameState
 
 
 class ZerkControllerTests(unittest.TestCase):
-    
+  
+    """
+    Tests for the MVC controller.
+    """
+  
     def setUp(self):
         # Define a mock input
         self.mockInput = io.StringIO('mock input')
@@ -25,4 +37,7 @@ class ZerkControllerTests(unittest.TestCase):
 
 
     def test_CanReceiveInputFromStream(self):
+        """
+        Can receive waiting input.
+        """
         self.assertEqual('mock input', self.controller.waitForInput())
