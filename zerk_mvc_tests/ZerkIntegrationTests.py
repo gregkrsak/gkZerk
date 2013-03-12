@@ -1,3 +1,15 @@
+# Filename: ZerkIntegrationTests.py
+# Author: Greg M. Krsak
+# License: MIT
+# Contact: greg.krsak@gmail.com
+#
+# Zerk is an Interactive Fiction (IF) style interpreter, inspired by Infocom's
+# Zork series. Zerk allows the use of custom maps, which are JSON-formatted.
+#
+# This file contains the tests that verify the Model, View, Controller,
+# and User are working together.
+#
+
 import unittest
 import json
 import io
@@ -15,13 +27,17 @@ from zerk_state import ZerkGameState
 
 
 class ZerkIntegrationTests(unittest.TestCase):
-    
+  
+    """
+    Tests an integrated environment of Model, View, Controller, and User.
+    """
+  
     def setUp(self):
         """
         Run before each test.
         """
         # Form a filename for the Zerk map and open the file
-        mapFilename = os.path.abspath(os.path.join(os.path.dirname(__file__), 'testmap.json'))
+        mapFilename = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test-map.json'))
         jsonString = open(mapFilename).read()
         # Parse the JSON from the file
         map = json.loads(jsonString)
@@ -95,7 +111,7 @@ class ZerkIntegrationTests(unittest.TestCase):
         Does the proper view show while playing?
         """
         self.user.gameState = ZerkGameState.Playing
-        self.model.sendNotificationToNoun('You can\'t go that way!', self.model.nounWithId(self.user.data['id']))
+        self.model.sendNotificationToNoun('You have received a mock notification', self.model.nounWithId(self.user.data['id']))
         print('\n')
         self.user.transmit()
         print()
