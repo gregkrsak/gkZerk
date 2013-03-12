@@ -1,3 +1,14 @@
+# Filename: ZerkUserTests.py
+# Author: Greg M. Krsak
+# License: MIT
+# Contact: greg.krsak@gmail.com
+#
+# Zerk is an Interactive Fiction (IF) style interpreter, inspired by Infocom's
+# Zork series. Zerk allows the use of custom maps, which are JSON-formatted.
+#
+# This file contains the tests for the ZerkUser.
+#
+
 import unittest
 import io
 
@@ -14,11 +25,12 @@ from zerk_state import ZerkGameState
 
 
 class ZerkUserTests(unittest.TestCase):
-    
+  
+    """
+    Tests for ZerkUser.
+    """
+  
     def setUp(self):
-        """
-        Sets up the ZerkUser unit tests.
-        """
         # Define a mock input
         self.mockInput = io.StringIO('mock input')
         # Define the local console
@@ -42,3 +54,5 @@ class ZerkUserTests(unittest.TestCase):
         # Create a user instance (containing a mock view and mock controller)
         self.user = ZerkUser(ZerkView(self.localOutput, self.mockModel), ZerkController(self.mockInput, self.mockModel))
 
+
+  # (currently no tests for this unit)
