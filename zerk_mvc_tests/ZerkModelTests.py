@@ -195,7 +195,7 @@ class ZerkModelTests(unittest.TestCase):
   
     def test_CanScriptLightingInRoom(self):
         """
-        Can use a light to change a room from 'unlit' to 'lit'.
+        Can use a light to change a room from 'lit' to 'unlit'.
         """
         self.model.roomWithId('room_003')['always_lit'] = 'false'
         # Lights are on
