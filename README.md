@@ -134,7 +134,7 @@ Additional resources
 
 * http://en.wikipedia.org/wiki/JSON
 
-  [Download Python]: http://www.python.org/getit/
+  [Download Python]: https://www.python.org/downloads/
   [How do I use Git?]: http://git-scm.com/documentation
   [Download GitHub for Windows]: http://windows.github.com/
   [Download GitHub for Mac]: http://mac.github.com/
