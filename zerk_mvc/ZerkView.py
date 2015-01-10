@@ -45,7 +45,7 @@ class ZerkView:
     
     def renderWelcomeBanner(self):
         endl = '\n'
-        self.buffer.write('gkZerk, an iteractive fiction interpreter' + endl)
+        self.buffer.write('gkZerk, an interactive fiction interpreter' + endl)
         self.buffer.write('Copyright (c) 2013 Greg M. Krsak (greg.krsak@gmail.com)' + endl)
         self.buffer.write('Provided under the MIT License: http://opensource.org/licenses/MIT' + endl)
         self.buffer.write(endl)

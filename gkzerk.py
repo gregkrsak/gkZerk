@@ -14,6 +14,7 @@ import io
 import sys
 import json
 import os.path
+import time
 
 from zerk_state import ZerkGameState
 
@@ -131,7 +132,7 @@ def usage():
     """
     Displays usage information
     """
-    print('gkZerk, an iteractive fiction interpreter')
+    print('gkZerk, an interactive fiction interpreter')
     print('Copyright (c) 2013 Greg M. Krsak (greg.krsak@gmail.com)')
     print('Provided under the MIT License: http://opensource.org/licenses/MIT')
     print()
@@ -140,6 +141,30 @@ def usage():
     print('Where <json_filename> is the filename of a JSON-formatted gkZerk map.')
     print('Please report any bugs to greg.krsak@gmail.com')
 
+def instructions():
+    """
+    Explanation
+    """
+    print('Hello, and welcome to gkZerk!')
+    time.sleep(2)
+    print('This is a framework for creating an interactive fiction(IF).')
+    time.sleep(2)
+    print('Down below you will be asked to enter a map name.')
+    time.sleep(2)
+    print('By default this folder has a map called "tutorial-map.json".')
+    time.sleep(2)
+    print('If you have no map currently just type in "tutorial-map".')
+    time.sleep(2)
+    print()
+    print('When entering a map name you created just simply add the files name. The framework will add the .json protocol.')
+    print()
+    time.sleep(2)
+    print('If you\'d like to see a .json sample file go ahead and open the .json file in a text editor.')
+    print()
+    time.sleep(2)
+    input("Press ENTER to start the framework.")
+    print()
+
 
 if __name__ == '__main__':
     argv = ''
@@ -147,4 +172,19 @@ if __name__ == '__main__':
         argv = sys.argv[1]
     except:
         pass
-    main(argv)
+    instructions()
+    # Allows user to select map using a name
+    mapName = input('Please Enter your map name: ')
+    print('Loading Map...')
+    time.sleep(2)
+    print()
+    #Outputs an Error Message if map is not in directory
+    while mapName == ' ' or os.path.isfile(mapName + '.json') == False:
+        print('Error Invalid Map Name')
+        mapName = input('Please Enter your map name: ')
+        time.sleep(2)
+        print('Loading Map...')
+        print()
+    print('Map Loaded')
+    main(mapName + '.json')
+

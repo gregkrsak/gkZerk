@@ -67,7 +67,7 @@ class ZerkUser:
             self.view.renderNotificationsForNounId(userId)
             self.view.renderRoom(userRoom)
             self.view.renderInputPromptForNounId(userId)
-            # Don't let the player notice themself in the room
+            # Don't let the player notice themselves in the room
             # FIXME: There's a better way than this
             friendlyNoun = self.controller.model.nounWithId(self.data['id'])['short_desc']
             indefiniteArticle = self.view.indefiniteArticleForWord(friendlyNoun)
@@ -82,7 +82,7 @@ class ZerkUser:
             self.view.renderNotificationsForNounId(userId)
             self.view.renderRoom(userRoom)
             self.view.renderVictoryMessageForNounId(userId)
-            # Don't let the player notice themself in the room
+            # Don't let the player notice themselves in the room
             # FIXME: There's a better way than this
             friendlyNoun = self.controller.model.nounWithId(self.data['id'])['short_desc']
             indefiniteArticle = self.view.indefiniteArticleForWord(friendlyNoun)
