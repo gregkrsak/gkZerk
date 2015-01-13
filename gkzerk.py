@@ -146,22 +146,15 @@ def instructions():
     Explanation
     """
     print('Hello, and welcome to gkZerk!')
-    time.sleep(2)
     print('This is a framework for creating an interactive fiction(IF).')
-    time.sleep(2)
     print('Down below you will be asked to enter a map name.')
-    time.sleep(2)
     print('By default this folder has a map called "tutorial-map.json".')
-    time.sleep(2)
     print('If you have no map currently just type in "tutorial-map".')
-    time.sleep(2)
     print()
     print('When entering a map name you created just simply add the files name. The framework will add the .json protocol.')
     print()
-    time.sleep(2)
     print('If you\'d like to see a .json sample file go ahead and open the .json file in a text editor.')
     print()
-    time.sleep(2)
     input("Press ENTER to start the framework.")
     print()
 
