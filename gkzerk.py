@@ -14,7 +14,6 @@ import io
 import sys
 import json
 import os.path
-import time
 
 from zerk_state import ZerkGameState
 
@@ -169,7 +168,6 @@ if __name__ == '__main__':
     # Allows user to select map using a name
     mapName = input('Please Enter your map name: ')
     print('Loading Map...')
-    time.sleep(2)
     print()
     #Outputs an Error Message if map is not in directory
     while mapName == ' ' or os.path.isfile(mapName + '.json') == False:
