@@ -33,24 +33,14 @@
     <Compile Include="zerk_mvc\ZerkUser.py" />
     <Compile Include="zerk_mvc\ZerkView.py" />
     <Compile Include="zerk_mvc\__init__.py" />
-    <Compile Include="zerk_mvc_tests\ZerkControllerTests.py" />
-    <Compile Include="zerk_mvc_tests\ZerkIntegrationTests.py" />
-    <Compile Include="zerk_mvc_tests\ZerkModelTests.py" />
-    <Compile Include="zerk_mvc_tests\ZerkUserTests.py" />
-    <Compile Include="zerk_mvc_tests\ZerkViewTests.py" />
-    <Compile Include="zerk_mvc_tests\zerk_mvc_tests.py" />
-    <Compile Include="zerk_mvc_tests\__init__.py" />
     <Compile Include="zerk_state\ZerkGameState.py" />
     <Compile Include="zerk_state\__init__.py" />
-    <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="zerk_mvc" />
-    <Folder Include="zerk_mvc_tests" />
     <Folder Include="zerk_state" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="README.md" />
     <Content Include="tutorial-map.json" />
   </ItemGroup>
