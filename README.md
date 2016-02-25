@@ -120,9 +120,7 @@ Additional resources
 
 * [How do I use Git?]
 
-* [Download GitHub for Windows]
-
-* [Download GitHub for Mac]
+* [Download GitHub Desktop for Windows or Mac]
 
 * [Download Git for Linux]
 
@@ -136,7 +134,6 @@ Additional resources
 
   [Download Python]: https://www.python.org/downloads/
   [How do I use Git?]: http://git-scm.com/documentation
-  [Download GitHub for Windows]: http://windows.github.com/
-  [Download GitHub for Mac]: http://mac.github.com/
+  [Download GitHub Desktop for Windows or Mac]: https://desktop.github.com/
   [Download Git for Linux]: http://git-scm.com/download/linux
 
