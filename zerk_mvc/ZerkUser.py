@@ -51,6 +51,18 @@ class ZerkUser:
         self.controller.disconnectUser(self)
 
 
+    def processBeforeTurnTriggers(self):
+        for noun in self.controller.model.nouns:
+            pythonString = self.controller.preprocessedBeforeTurnTriggerForNoun(noun)
+            self.controller.runScript(pythonString)
+
+
+    def processAfterTurnTriggers(self):
+        for noun in self.controller.model.nouns:
+            pythonString = self.controller.preprocessedAfterTurnTriggerForNoun(noun)
+            self.controller.runScript(pythonString)
+
+
     def transmit(self):
         # Starting
         if self.gameState == ZerkGameState.Starting:

@@ -187,6 +187,13 @@ class ZerkModel:
         return result
 
 
+    def preprocessedTriggerForNoun(self, trigger, noun):
+        result = ''
+        if noun[trigger] != None:
+            result = self.expandSpecialVariablesInString(noun[trigger], noun['id'], None, None, None)
+        return result
+
+
     def moveNounWithIdThroughExit(self, nounId, exitDir):
         result = True
         currentRoom = self.roomsContainingNounWithId(nounId)[0]

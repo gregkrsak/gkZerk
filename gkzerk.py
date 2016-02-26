@@ -82,13 +82,10 @@ def play(map):
         elif localUser.gameState == ZerkGameState.Started:
             localUser.transmit()
             localUser.gameState = ZerkGameState.Playing
-        # Playing
+        # Playing (primary gameplay)
         elif localUser.gameState == ZerkGameState.Playing:
             # Run before_each_turn noun scripts
-            for noun in localUser.controller.model.nouns:
-                if noun['before_each_turn'] != None:
-                    pythonString = localUser.controller.model.expandSpecialVariablesInString(noun['before_each_turn'], noun['id'], None, None, None)
-                    localUser.controller.model.execPythonString(pythonString)
+            localUser.processBeforeTurnTriggers()
             # Transmit the user's view
             localUser.transmit()
             # Receive input from the user
@@ -96,10 +93,7 @@ def play(map):
             # Process the input
             localUser.controller.parseCommandFromNounWithId(input, localUser.data['id'])
             # Run after_each_turn noun scripts
-            for noun in localUser.controller.model.nouns:
-                if noun['after_each_turn'] != None:
-                    pythonString = localUser.controller.model.expandSpecialVariablesInString(noun['after_each_turn'], noun['id'], None, None, None)
-                    localUser.controller.model.execPythonString(pythonString)
+            localUser.processAfterTurnTriggers()
         # Finished / Won
         elif localUser.gameState == ZerkGameState.FinishedWon:
             # Transmit victory notification to all nouns

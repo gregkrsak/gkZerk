@@ -41,6 +41,14 @@ class ZerkController:
         return self.input.readline()
 
 
+    def preprocessedBeforeTurnTriggerForNoun(self, noun):
+        return self.model.preprocessedTriggerForNoun('before_each_turn', noun)
+
+
+    def preprocessedAfterTurnTriggerForNoun(self, noun):
+        return self.model.preprocessedTriggerForNoun('after_each_turn', noun)
+
+
     def parseCommandFromNounWithId(self, commandString, sourceNounId):
         # Cleanup the input
         commandString = commandString.strip().lower()
@@ -103,4 +111,7 @@ class ZerkController:
             else:
                 print('\nI don\'t know how to ' + verbString + '.')
 
-                
+
+    def runScript(self, script):
+        self.model.execPythonString(script)
+  
