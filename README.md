@@ -1,4 +1,4 @@
-gkZerk
+gkZerk: The Great Work-in-Progress
 ==============
 
 This is an interactive fiction (IF) interpreter that I wrote for a class project. It was inspired by Infocom's IF adventure games (especially the Zork series). Traditionally, IF games are all-text, and gkZerk is no exception. It's like reading a book, only it's a game.
