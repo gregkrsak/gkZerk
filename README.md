@@ -18,6 +18,8 @@ cd gkZerk
 python gkzerk.py tutorial-map.json
 ```
 
+For Windows users, Make sure you run python from the Windows command prompt, and *not* from Git Bash (See [Issue #12](https://github.com/gregkrsak/gkZerk/issues/12)).
+
 Make your own maps
 ------------------
 
