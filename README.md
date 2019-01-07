@@ -5,20 +5,24 @@ gkZerk: The Great Work-in-Progress
 [![Python](https://img.shields.io/badge/language-python-blue.svg)](https://github.com/gregkrsak/gkZerk/blob/master/gkzerk.py)
 
 
-This is an interactive fiction (IF) interpreter that I wrote for a class project. It was inspired by Infocom's IF adventure games (especially the Zork series). Traditionally, IF games are all-text, and gkZerk is no exception. It's like reading a book, only it's a game.
+This is an interactive fiction (IF) interpreter that I wrote for a class project. It was inspired by Infocom's IF adventure games (especially the Zork series). Traditionally, IF games are all-text, and gkZerk is no exception. It's like reading a book, only it's a game. Also, it's very buggy.
 
 Try it out
 ----------
 
-You'll need a Python 3 interpreter.
+You'll need a Python 3 interpreter. For a Windows install, make sure you check the box to add Python to your system path.
 
 * [Download Python]
 
-Once you have that, it's pretty simple:
+Once you have Python installed, it's pretty simple:
 
 ```
-gkzerk.py tutorial-map.json
+git clone https://github.com/gregkrsak/gkZerk.git
+cd gkZerk
+python gkzerk.py tutorial-map.json
 ```
+
+For Windows users, Make sure you run python from the Windows command prompt, and *not* from Git Bash (See [Issue #12](https://github.com/gregkrsak/gkZerk/issues/12)).
 
 Make your own maps
 ------------------
