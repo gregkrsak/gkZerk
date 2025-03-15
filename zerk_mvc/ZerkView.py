@@ -24,7 +24,12 @@ class ZerkView:
     
     @property
     def dictionaryForNewUser(self):
+        """
+        Returns a dictionary representing a new user.
+        """
         newUserId = self.model.nextPlayableNounId
+        if newUserId is None:
+            raise ValueError("No playable noun found in the map.")
         return self.model.nounWithId(newUserId)
 
 

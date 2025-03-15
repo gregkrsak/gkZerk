@@ -54,7 +54,7 @@ class ZerkModel:
     @property
     def nextPlayableNounId(self):
         result = None
-        for noun in (self.nouns):
+        for noun in self.nouns:
             if noun['playable'] == 'true':
                 result = noun['id']
         return result
@@ -72,7 +72,7 @@ class ZerkModel:
     
     def childObjectOfParentArrayKeyWithChildId(self, parentArrayKey, objectId):
         result = None
-        for childObj in (self._map[parentArrayKey]):
+        for childObj in self._map[parentArrayKey]:
             if childObj['id'] == objectId:
                 result = childObj
         return result
@@ -91,24 +91,29 @@ class ZerkModel:
 
     
     def nounIdWithShortDesc(self, shortDesc):
+        """
+        Returns the ID of a noun that matches the given short description (partial or full).
+        """
         result = None
-        for noun in (self.nouns):
-            if noun['short_desc'] == shortDesc:
+        for noun in self.nouns:
+            # Check if the input is a substring of the noun's short description
+            if shortDesc.lower() in noun['short_desc'].lower():
                 result = noun['id']
+                break
         return result
     
     
     def grandparentObjectsOfChildStringWithGreatGrandparentAndParentArrayKeys(self, greatGrandparentArrayKey, parentArrayKey, childString):
         result = []
-        for grandparentObj in (self._map[greatGrandparentArrayKey]):
-            for childStr in (grandparentObj[parentArrayKey]):
+        for grandparentObj in self._map[greatGrandparentArrayKey]:
+            for childStr in grandparentObj[parentArrayKey]:
                 if childStr == childString:
                     result.append(grandparentObj)
         return result
 
     
     def roomsContainingNounWithId(self, nounId):
-        result = [ ]
+        result = []
         result = self.grandparentObjectsOfChildStringWithGreatGrandparentAndParentArrayKeys('rooms', 'obvious_nouns', nounId)
         if len(result) == 0:
             # If the noun is found in another noun's inventory, return the room of that noun
@@ -391,7 +396,7 @@ class ZerkModel:
         if len(exitList) != 0:
             stillLooking = True
             while stillLooking:
-                for exit in (exitList):
+                for exit in exitList:
                     exitDir = exit.strip()
                     # If a random check passes, choose this exit
                     if random.randrange(1,4) == 2:

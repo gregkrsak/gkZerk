@@ -19,7 +19,10 @@ class ZerkUser:
         self.view = view
         self.controller = controller
         
-        self._data = self.view.dictionaryForNewUser
+        # Initialize the user's data using the view's dictionaryForNewUser property
+        self._data = view.dictionaryForNewUser
+        if self._data is None:
+            raise ValueError("Failed to initialize user data. Check dictionaryForNewUser in ZerkView.")
 
     
     @property
@@ -36,7 +39,7 @@ class ZerkUser:
 
     
     def input(self):
-        return self.controller.waitForInput();
+        return self.controller.waitForInput()
     
     
     def output(self):
@@ -121,4 +124,3 @@ class ZerkUser:
     def receive(self):
         # Receive input from the user
         return self.controller.waitForInput()
-
