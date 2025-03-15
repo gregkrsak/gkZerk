@@ -10,6 +10,7 @@
 #
 
 import os
+import re
 
 from zerk_state import ZerkGameState
 
@@ -50,68 +51,178 @@ class ZerkController:
 
 
     def parseCommandFromNounWithId(self, commandString, sourceNounId):
+        """
+        Parses a command string and executes the corresponding action.
+        """
         # Cleanup the input
         commandString = commandString.strip().lower()
         
         # Abort gracefully if the command is empty
         if len(commandString) == 0:
-            return True;
+            return True
         
-        # Split the command into separate words
-        cmdWords = commandString.split(' ')
+        # Handle complex commands (e.g., "take key and open door")
+        if ' and ' in commandString:
+            self.parseComplexCommand(commandString, sourceNounId)
+            return True
+        
+        # Handle prepositions (e.g., "take key with hand")
+        if ' with ' in commandString or ' using ' in commandString:
+            self.handlePrepositions(commandString, sourceNounId)
+            return True
+        
+        # Handle contextual commands (e.g., "look" vs. "look at key")
+        self.handleContextualCommands(commandString, sourceNounId)
+        return True
 
+
+    def runScript(self, script):
+        """
+        Executes a Python script string.
+        """
+        self.model.execPythonString(script)
+
+
+    def parseComplexCommand(self, commandString, sourceNounId):
+        """
+        Parses complex commands with multiple verbs and nouns.
+        """
+        # Split the command into parts based on conjunctions like "and"
+        parts = re.split(r'\s+and\s+', commandString)
+        for part in parts:
+            self.parseSimpleCommand(part, sourceNounId)
+
+
+    def parseSimpleCommand(self, commandString, sourceNounId):
+        """
+        Parses a simple command (single verb and noun).
+        """
+        # Split the command into words
+        cmdWords = commandString.split(' ')
+        
         # Assume the first word is a verb
         verbString = cmdWords[0]
-        # Assume the second word is a noun
-        try:
+        
+        # Assume the second word is a noun (skip "the" or "at")
+        nounString = None
+        if len(cmdWords) > 1:
             nounString = cmdWords[1]
-            # Wait, is this second word the word "the" or "at"?..
-            if (nounString == 'the') or (nounString == 'at'):
-                try:
-                    # Assume the third word is a noun
-                    nounString = cmdWords[2]
-                except:
-                    # Can't have verb+"the" or verb+"at" without a noun
-                    return False;
-        except:
-            # No noun, no problem
-            nounString = None
-
-        # Playing
-        # TODO: Support initial word 'go' (as in the command string 'go north')
-        if self.model.gameStateForNounWithId(sourceNounId) == ZerkGameState.Playing:
-            
-            # Search known verbs
-            match = None
-            for knownVerb in (self.model.verbs):
-                if verbString == knownVerb['id']: # TODO: Support abbreviations
-                    match = knownVerb
-                    break
-                else:
-                    # Search known synonyms
-                    for knownSynonym in knownVerb['synonyms']:
-                        if verbString == knownSynonym: # TODO: Support abbreviations
-                            match = knownVerb
-                            verbString = match['id']
-                            break
-
-            # Was there a match?
-            if match != None:
-                try:
-                    targetNounId = self.model.nounIdWithShortDesc(nounString)
-                except:
-                    targetNounId = ''
+            if nounString in ['the', 'a', 'an', 'at']:
+                nounString = cmdWords[2] if len(cmdWords) > 2 else None
+        
+        # Search known verbs
+        match = None
+        for knownVerb in self.model.verbs:
+            if verbString == knownVerb['id']:
+                match = knownVerb
+                break
+            else:
+                # Search known synonyms
+                for knownSynonym in knownVerb['synonyms']:
+                    if verbString == knownSynonym:
+                        match = knownVerb
+                        verbString = match['id']
+                        break
+        
+        # Was there a match?
+        if match is not None:
+            try:
+                targetNounId = self.model.nounIdWithShortDesc(nounString) if nounString else None
                 pythonString = self.model.expandSpecialVariablesInString(match['immediately'], sourceNounId, verbString, targetNounId, nounString)
                 # DEBUG
-                #print('[DEBUG] running script: ' + pythonString)
+                # print('[DEBUG] running script: ' + pythonString)
                 self.model.execPythonString(pythonString)
                 # Increment user's turns_taken
                 turn = int(self.model.nounWithId(sourceNounId)['turns_taken'])
                 self.model.nounWithId(sourceNounId)['turns_taken'] = str(turn + 1)
+            except Exception as e:
+                print(f"\nI don't understand '{commandString}'. Try something else.")
+        else:
+            self.suggestCommand(commandString, sourceNounId)
+
+
+    def suggestCommand(self, commandString, sourceNounId):
+        """
+        Suggests possible commands based on the input.
+        """
+        # Get the current room and inventory
+        currentRoom = self.model.roomsContainingNounWithId(sourceNounId)[0]
+        inventory = self.model.nounWithId(sourceNounId)['inventory']
+        
+        # Suggest verbs based on the current context
+        possibleVerbs = []
+        for verb in self.model.verbs:
+            if verb['id'] in ['look', 'take', 'drop', 'use', 'kill', 'flee', 'inventory']:
+                possibleVerbs.append(verb['id'])
+        
+        # Suggest nouns based on the current room and inventory
+        possibleNouns = []
+        for nounId in currentRoom['obvious_nouns']:
+            noun = self.model.nounWithId(nounId)
+            possibleNouns.append(noun['short_desc'])
+        for itemId in inventory:
+            item = self.model.nounWithId(itemId)
+            possibleNouns.append(item['short_desc'])
+        
+        # Generate suggestions
+        suggestions = []
+        for verb in possibleVerbs:
+            for noun in possibleNouns:
+                suggestions.append(f"{verb} {noun}")
+        
+        # Display suggestions
+        print(f"\nI don't understand '{commandString}'. Did you mean one of these?")
+        for suggestion in suggestions[:5]:  # Limit to 5 suggestions
+            print(f"- {suggestion}")
+
+
+    def handlePrepositions(self, commandString, sourceNounId):
+        """
+        Handles prepositions in commands (e.g., "take key with hand").
+        """
+        # Split the command into parts based on prepositions
+        if ' with ' in commandString:
+            parts = commandString.split(' with ')
+        elif ' using ' in commandString:
+            parts = commandString.split(' using ')
+        else:
+            parts = [commandString]
+        
+        # Parse the main command (e.g., "take key")
+        mainCommand = parts[0]
+        self.parseSimpleCommand(mainCommand, sourceNounId)
+        
+        # Handle the tool or secondary object (e.g., "with hand")
+        if len(parts) > 1:
+            toolCommand = parts[1]
+            toolNounId = self.model.nounIdWithShortDesc(toolCommand)
+            if toolNounId:
+                # Check if the tool is in the player's inventory
+                if toolNounId in self.model.nounWithId(sourceNounId)['inventory']:
+                    print(f"\nYou use the {toolCommand} to complete the action.")
+                else:
+                    print(f"\nYou don't have the {toolCommand} in your inventory.")
             else:
-                print('\nI don\'t know how to ' + verbString + '.')
+                print(f"\nI don't see a {toolCommand} here.")
 
 
-    def runScript(self, script):
-        self.model.execPythonString(script)
-  
+    def handleContextualCommands(self, commandString, sourceNounId):
+        """
+        Handles commands that change based on context (e.g., "look" vs. "look at key").
+        """
+        # Handle "look" command
+        if commandString == 'look':
+            self.model.lookAtNounStringFromNounWithId('$', sourceNounId)
+            return
+        
+        # Handle "look at [noun]" command
+        if commandString.startswith('look at '):
+            nounString = commandString[8:]  # Remove "look at "
+            # Strip out articles like "the," "a," or "an"
+            nounString = re.sub(r'^(the|a|an)\s+', '', nounString)
+            self.model.lookAtNounStringFromNounWithId(nounString, sourceNounId)
+            return
+        
+        # Handle other contextual commands
+        self.parseSimpleCommand(commandString, sourceNounId)
+        
