@@ -52,6 +52,10 @@ class ZerkModel:
         return self._map['verbs']
     
     @property
+    def scripts(self):
+        return self._map.get('scripts', [])
+    
+    @property
     def nextPlayableNounId(self):
         result = None
         for noun in self.nouns:
@@ -169,32 +173,68 @@ class ZerkModel:
 
 
     def expandSpecialVariablesInString(self, theString, sourceNounId, verbId, targetNounId, nounString):
-        if sourceNounId != None:
-            theString = theString.replace('${SOURCE_NOUN_ID}', sourceNounId)
-        if targetNounId != None:
-            theString = theString.replace('${TARGET_NOUN_ID}', targetNounId)
-        if verbId != None:
-            theString = theString.replace('${VERB_ID}', verbId)
-        if nounString != None:
-            theString = theString.replace('${TARGET_NOUN_STRING}', nounString)
-        result = theString
-        return result
+        """
+        Expands special variables in a string (e.g., ${SOURCE_NOUN_ID}, ${TARGET_NOUN_ID}).
+        """
+        if theString is None:
+            return None  # Return None if the input string is None
+        if sourceNounId is not None:
+            theString = theString.replace('${SOURCE_NOUN_ID}', str(sourceNounId))
+        if targetNounId is not None:
+            theString = theString.replace('${TARGET_NOUN_ID}', str(targetNounId))
+        if verbId is not None:
+            theString = theString.replace('${VERB_ID}', str(verbId))
+        if nounString is not None:
+            theString = theString.replace('${TARGET_NOUN_STRING}', str(nounString))
+        return theString
 
 
-    def execPythonString(self, pythonString):
-        result = True
+    def scriptWithId(self, scriptId):
+        """
+        Returns the script code for a given script ID.
+        """
+        for script in self.scripts:
+            if script['id'] == scriptId:
+                return script['code']
+        return None
+
+
+    def execPythonString(self, pythonString, sourceNounId=None, verbId=None, targetNounId=None, nounString=None):
+        """
+        Executes a Python script string or looks up and executes a script by ID.
+        """
+        if pythonString is None:
+            print('[DEBUG] Script is None, skipping execution.')
+            return False  # Skip execution if the script is None
+
+        #print(f'[DEBUG] Executing script: {pythonString}')
+        #print(f'[DEBUG] sourceNounId: {sourceNounId}, targetNounId: {targetNounId}, verbId: {verbId}, nounString: {nounString}')
+
+        if pythonString.startswith('script_'):
+            scriptId = pythonString
+            pythonString = self.scriptWithId(scriptId)
+            if pythonString is None:
+                print(f'[DEBUG] Script ID {scriptId} not found.')
+                return False
+
+        # Expand special variables in the script
+        pythonString = self.expandSpecialVariablesInString(pythonString, sourceNounId, verbId, targetNounId, nounString)
+
+        if pythonString is None:
+            print('[DEBUG] Expanded script is None, skipping execution.')
+            return False  # Skip execution if the expanded script is None
+
         try:
             exec(pythonString)
-        except:
-            result = False
-            # DEBUG
-            print('[WARNING] script failed: \n' + pythonString + '\n')
-        return result
+            return True
+        except Exception as e:
+            print(f'[WARNING] Script failed: {pythonString}\nError: {e}')
+            return False
 
 
     def preprocessedTriggerForNoun(self, trigger, noun):
         result = ''
-        if noun[trigger] != None:
+        if noun[trigger] is not None:
             result = self.expandSpecialVariablesInString(noun[trigger], noun['id'], None, None, None)
         return result
 
