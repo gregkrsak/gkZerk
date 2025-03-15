@@ -27,7 +27,7 @@
             "obvious_exits": "s,w",
             "exit_s": "jungle_entrance",
             "exit_w": "hidden_chamber",
-            "on_entry": "self.setLitInRoomWithId('${ROOM_ID}', True)",
+            "on_entry": "script_015",
             "obvious_nouns": ["altar_001", "crystal_001"],
             "requires_nouns": ["key_001"]
         },
@@ -199,7 +199,7 @@
             "long_desc": "A pulsating crystal rests on the altar, radiating a soft, blue light.",
             "before_each_turn": "",
             "after_each_turn": "",
-            "on_take": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 10)",
+            "on_take": "script_003",
             "on_drop": "",
             "inventory": [],
             "allowed_verbs": ["take", "drop"]
@@ -250,7 +250,7 @@
             "long_desc": "A rusty key, covered in dirt and grime. It looks like it hasn't been used in years.",
             "before_each_turn": "",
             "after_each_turn": "",
-            "on_take": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 5)",
+            "on_take": "script_003",
             "on_drop": "",
             "inventory": [],
             "allowed_verbs": ["take", "drop"]
@@ -284,7 +284,7 @@
             "long_desc": "A simple fishing rod lies on the ground. It looks like it hasn't been used in a while.",
             "before_each_turn": "",
             "after_each_turn": "",
-            "on_take": "self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 5)",
+            "on_take": "script_003",
             "on_drop": "",
             "inventory": [],
             "allowed_verbs": ["take", "drop"]
@@ -361,53 +361,59 @@
     "verbs": [
         {
             "id": "north",
-            "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'n')",
+            "immediately": "script_007",
             "synonyms": ["n"]
         },
         {
             "id": "south",
-            "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 's')",
+            "immediately": "script_007",
             "synonyms": ["s"]
         },
         {
             "id": "east",
-            "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'e')",
+            "immediately": "script_007",
             "synonyms": ["e"]
         },
         {
             "id": "west",
-            "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'w')",
+            "immediately": "script_007",
             "synonyms": ["w"]
         },
         {
             "id": "up",
-            "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'u')",
+            "immediately": "script_007",
             "synonyms": ["u"]
         },
         {
             "id": "down",
-            "immediately": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', 'd')",
+            "immediately": "script_007",
             "synonyms": ["d"]
         },
         {
             "id": "take",
-            "immediately": "self.addNounWithIdToInventoryOfNounWithId('${TARGET_NOUN_ID}', '${SOURCE_NOUN_ID}'); self.removeNounWithIdFromRoomWithId('${TARGET_NOUN_ID}', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id']) if self.nounWithId('${TARGET_NOUN_ID}')['big'] == 'false' else self.sendNotificationToNoun('You can\\'t pick that up!', self.nounWithId('${SOURCE_NOUN_ID}'))",
+            "immediately": "script_008",
             "synonyms": ["get", "grab", "acquire", "hold"]
         },
         {
             "id": "drop",
-            "immediately": "self.removeNounWithIdFromInventoryOfNounWithId('${TARGET_NOUN_ID}', '${SOURCE_NOUN_ID}'); self.addNounWithIdToRoomWithId('${TARGET_NOUN_ID}', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id'])",
+            "immediately": "script_009",
             "synonyms": ["dump", "throw", "toss"]
         },
         {
             "id": "look",
-            "immediately": "self.lookAtNounStringFromNounWithId('${TARGET_NOUN_STRING}', '${SOURCE_NOUN_ID}')",
+            "immediately": "script_013",
             "synonyms": ["view", "notice", "observe", "glance", "stare"]
         },
         {
             "id": "inventory",
-            "immediately": "for itemId in (self.nounWithId('${SOURCE_NOUN_ID}')['inventory']): self.sendNotificationToNoun(self.nounWithId(itemId)['short_desc'], self.nounWithId('${SOURCE_NOUN_ID}'))",
+            "immediately": "script_012",
             "synonyms": ["items", "list"]
+        }
+    ],
+    "scripts": [
+        {
+            "id": "script_015",
+            "code": "self.setLitInRoomWithId('${ROOM_ID}', True)"
         }
     ]
 }

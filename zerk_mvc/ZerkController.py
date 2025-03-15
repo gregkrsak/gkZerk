@@ -128,10 +128,9 @@ class ZerkController:
         if match is not None:
             try:
                 targetNounId = self.model.nounIdWithShortDesc(nounString) if nounString else None
+                # Pass sourceNounId and targetNounId to the script
                 pythonString = self.model.expandSpecialVariablesInString(match['immediately'], sourceNounId, verbString, targetNounId, nounString)
-                # DEBUG
-                # print('[DEBUG] running script: ' + pythonString)
-                self.model.execPythonString(pythonString)
+                self.model.execPythonString(pythonString, sourceNounId, verbString, targetNounId, nounString)
                 # Increment user's turns_taken
                 turn = int(self.model.nounWithId(sourceNounId)['turns_taken'])
                 self.model.nounWithId(sourceNounId)['turns_taken'] = str(turn + 1)
@@ -225,4 +224,3 @@ class ZerkController:
         
         # Handle other contextual commands
         self.parseSimpleCommand(commandString, sourceNounId)
-        
