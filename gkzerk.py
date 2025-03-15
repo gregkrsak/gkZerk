@@ -126,7 +126,7 @@ def usage():
     Displays usage information
     """
     print('gkZerk, an iteractive fiction interpreter')
-    print('Copyright (c) 2013 Greg M. Krsak (greg.krsak@gmail.com)')
+    print('Copyright (c) 2013, 2025 Greg M. Krsak (greg.krsak@gmail.com)')
     print('Provided under the MIT License: http://opensource.org/licenses/MIT')
     print()
     print('Usage: gkzerk.py <json_filename>')
