@@ -225,7 +225,7 @@ class ZerkModel:
             return False  # Skip execution if the expanded script is None
 
         try:
-            exec(pythonString)
+            exec(pythonString, {'self': self})
             return True
         except Exception as e:
             print(f'[WARNING] Script failed: {pythonString}\nError: {e}')

@@ -1,0 +1,692 @@
+{
+    "zerk": "map",
+    "version": "1",
+    "about": {
+        "title": "Escape from Zorbon",
+        "author": "AI Game Designer",
+        "version": "1.0"
+    },
+    "rooms": [
+        {
+            "id": "spaceship_001",
+            "type": "SpaceshipInterior",
+            "always_lit": "true",
+            "lit": "true",
+            "obvious_exits": "out",
+            "exit_out": "forest_001",
+            "on_entry": "",
+            "obvious_nouns": ["player_001", "communicator_001", "ship_log_001"],
+            "requires_nouns": []
+        },
+        {
+            "id": "forest_001",
+            "type": "Forest",
+            "always_lit": "false",
+            "lit": "true",
+            "obvious_exits": "north, east, west, in",
+            "exit_north": "forest_002",
+            "exit_east": "ruins_001",
+            "exit_west": "cave_001",
+            "exit_in": "spaceship_001",
+            "on_entry": "",
+            "obvious_nouns": ["alien_001", "laser_cutter_001"],
+            "requires_nouns": []
+        },
+        {
+            "id": "forest_002",
+            "type": "Forest",
+            "always_lit": "false",
+            "lit": "true",
+            "obvious_exits": "south",
+            "exit_south": "forest_001",
+            "on_entry": "",
+            "obvious_nouns": ["navigation_module_001"],
+            "requires_nouns": []
+        },
+        {
+            "id": "ruins_001",
+            "type": "AlienRuins",
+            "always_lit": "false",
+            "lit": "true",
+            "obvious_exits": "west",
+            "exit_west": "forest_001",
+            "on_entry": "",
+            "obvious_nouns": ["translator_device_001", "locked_chest_001"],
+            "requires_nouns": []
+        },
+        {
+            "id": "cave_001",
+            "type": "Cave",
+            "always_lit": "false",
+            "lit": "false",
+            "obvious_exits": "east, down",
+            "exit_east": "forest_001",
+            "exit_down": "base_001",
+            "on_entry": "script_cave_entry",
+            "obvious_nouns": ["zorbonian_crystal_001", "hostile_alien_001"],
+            "requires_nouns": []
+        },
+        {
+            "id": "base_001",
+            "type": "UndergroundBase",
+            "always_lit": "false",
+            "lit": "false",
+            "obvious_exits": "up",
+            "exit_up": "cave_001",
+            "on_entry": "",
+            "obvious_nouns": ["generator_001", "fuel_cell_001", "locked_door_001"],
+            "requires_nouns": ["base_key_001"]
+        }
+    ],
+    "room_types": [
+        {
+            "id": "SpaceshipInterior",
+            "short_desc": "Crashed Spaceship",
+            "long_desc": "The interior of your spaceship is a wreck. Sparks flicker from broken panels, and the hull groans ominously."
+        },
+        {
+            "id": "Forest",
+            "short_desc": "Alien Forest",
+            "long_desc": "Bioluminescent plants cast a faint glow. Strange chirps and rustles echo through the dense foliage."
+        },
+        {
+            "id": "AlienRuins",
+            "short_desc": "Ancient Alien Ruins",
+            "long_desc": "Weathered stones bear cryptic carvings, hinting at a lost civilization long forgotten."
+        },
+        {
+            "id": "Cave",
+            "short_desc": "Dark Cave",
+            "long_desc": "The air is damp and cold. Distant echoes suggest something lurking in the shadows."
+        },
+        {
+            "id": "UndergroundBase",
+            "short_desc": "Underground Base",
+            "long_desc": "A high-tech facility hums faintly, though much of it lies dormant without power."
+        }
+    ],
+    "nouns": [
+        {
+            "id": "player_001",
+            "active": "false",
+            "playable": "true",
+            "connected": "false",
+            "game_state": "quit",
+            "turns_taken": "0",
+            "turns_allowed": "200",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "true",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "afraid_of": ["hostile_alien_001"],
+            "short_desc": "space explorer",
+            "long_desc": "You are a brave space explorer, stranded on Zorbon after your ship crashed.",
+            "before_each_turn": "script_player_start",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "inventory": ["communicator_001"],
+            "allowed_verbs": []
+        },
+        {
+            "id": "communicator_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "true",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "on": "false",
+            "short_desc": "communicator",
+            "long_desc": "A damaged device for communication. It might work if powered.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop", "use"]
+        },
+        {
+            "id": "ship_log_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "short_desc": "ship log",
+            "long_desc": "The log reads: 'Crash-landed on Zorbon. Need engine part, navigation module, and fuel cell to escape.'",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["look"]
+        },
+        {
+            "id": "alien_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "true",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "afraid_of": [],
+            "short_desc": "friendly alien",
+            "long_desc": "A curious alien with glowing eyes, seemingly willing to assist you.",
+            "before_each_turn": "script_alien_behavior",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "on_death": "",
+            "inventory": [],
+            "allowed_verbs": ["talk", "apply"]
+        },
+        {
+            "id": "hostile_alien_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "true",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "afraid_of": [],
+            "short_desc": "hostile alien",
+            "long_desc": "A menacing creature with sharp claws, stalking the cave.",
+            "before_each_turn": "script_hostile_behavior",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "on_death": "script_alien_death",
+            "inventory": [],
+            "turns_active": "0",
+            "allowed_verbs": ["kill"]
+        },
+        {
+            "id": "laser_cutter_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "true",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "true",
+            "on": "false",
+            "short_desc": "laser cutter",
+            "long_desc": "A tool for cutting through tough materials. Requires power to operate.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop", "use", "apply"]
+        },
+        {
+            "id": "translator_device_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "true",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "on": "false",
+            "short_desc": "translator device",
+            "long_desc": "A device to decipher alien languages, if activated.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop", "use"]
+        },
+        {
+            "id": "zorbonian_crystal_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "short_desc": "zorbonian crystal",
+            "long_desc": "A glowing crystal prized by the locals.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop", "apply"]
+        },
+        {
+            "id": "base_key_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "short_desc": "base key",
+            "long_desc": "A metallic key to access the underground base.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop"]
+        },
+        {
+            "id": "generator_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "true",
+            "mortal": "false",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "on": "false",
+            "short_desc": "generator",
+            "long_desc": "A dormant power generator. It could light up the base if fixed.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["use", "apply"]
+        },
+        {
+            "id": "locked_door_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "short_desc": "locked door",
+            "long_desc": "A sturdy door blocking access to deeper parts of the base.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["apply"]
+        },
+        {
+            "id": "engine_part_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "short_desc": "engine part",
+            "long_desc": "A critical component to repair your spaceship’s engine.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop"]
+        },
+        {
+            "id": "navigation_module_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "short_desc": "navigation module",
+            "long_desc": "A device to chart a course off this planet.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop"]
+        },
+        {
+            "id": "fuel_cell_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "false",
+            "weapon": "false",
+            "short_desc": "fuel cell",
+            "long_desc": "A power source to fuel your spaceship’s launch.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "script_take_item",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": ["take", "drop"]
+        },
+        {
+            "id": "locked_chest_001",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "short_desc": "locked chest",
+            "long_desc": "An ancient chest with alien markings. It’s sealed tight.",
+            "before_each_turn": "",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "inventory": ["engine_part_001"],
+            "allowed_verbs": ["apply"]
+        },
+        {
+            "id": "game_world",
+            "active": "true",
+            "playable": "false",
+            "connected": "false",
+            "game_state": "playing",
+            "turns_taken": "0",
+            "turns_allowed": "100",
+            "score": "0",
+            "notifications": [],
+            "switchable": "false",
+            "mortal": "false",
+            "alive": "true",
+            "big": "true",
+            "weapon": "false",
+            "short_desc": "game world",
+            "long_desc": "The unseen mechanisms of Zorbon.",
+            "before_each_turn": "script_global_logic",
+            "after_each_turn": "",
+            "on_take": "",
+            "on_drop": "",
+            "inventory": [],
+            "allowed_verbs": []
+        }
+    ],
+    "verbs": [
+        {
+            "id": "north",
+            "immediately": "script_move",
+            "synonyms": ["n"]
+        },
+        {
+            "id": "south",
+            "immediately": "script_move",
+            "synonyms": ["s"]
+        },
+        {
+            "id": "east",
+            "immediately": "script_move",
+            "synonyms": ["e"]
+        },
+        {
+            "id": "west",
+            "immediately": "script_move",
+            "synonyms": ["w"]
+        },
+        {
+            "id": "up",
+            "immediately": "script_move",
+            "synonyms": ["u"]
+        },
+        {
+            "id": "down",
+            "immediately": "script_move",
+            "synonyms": ["d"]
+        },
+        {
+            "id": "in",
+            "immediately": "script_move",
+            "synonyms": ["enter"]
+        },
+        {
+            "id": "out",
+            "immediately": "script_move",
+            "synonyms": ["exit"]
+        },
+        {
+            "id": "take",
+            "immediately": "script_take",
+            "synonyms": ["get", "grab"]
+        },
+        {
+            "id": "drop",
+            "immediately": "script_drop",
+            "synonyms": ["discard"]
+        },
+        {
+            "id": "use",
+            "immediately": "script_use",
+            "synonyms": ["activate"]
+        },
+        {
+            "id": "kill",
+            "immediately": "script_kill",
+            "synonyms": ["attack"]
+        },
+        {
+            "id": "inventory",
+            "immediately": "script_inventory",
+            "synonyms": ["items"]
+        },
+        {
+            "id": "look",
+            "immediately": "script_look",
+            "synonyms": ["examine", "read"]
+        },
+        {
+            "id": "quit",
+            "immediately": "script_quit",
+            "synonyms": ["exit"]
+        },
+        {
+            "id": "talk",
+            "immediately": "script_talk",
+            "synonyms": ["speak"]
+        },
+        {
+            "id": "apply",
+            "immediately": "script_apply",
+            "synonyms": ["use_on"]
+        },
+        {
+            "id": "launch",
+            "immediately": "script_launch",
+            "synonyms": ["takeoff"]
+        },
+        {
+            "id": "open",
+            "immediately": "script_open",
+            "synonyms": ["unlock"]
+        },
+        {
+            "id": "give",
+            "immediately": "script_give",
+            "synonyms": ["offer"]
+        }
+    ],
+    "scripts": [
+        {
+            "id": "script_player_start",
+            "code": "if int(self.nounWithId('player_001')['turns_taken']) == 0:\n    self.sendNotificationToNoun('You awaken in your crashed spaceship. You must find a way off this planet.', self.nounWithId('player_001'))"
+        },
+        {
+            "id": "script_spaceship_entry",
+            "code": "self.sendNotificationToNoun('You awaken in your crashed spaceship. You must find a way off this planet.', self.nounWithId('player_001'))"
+        },
+        {
+            "id": "script_take_item",
+            "code": "self.nounWithId('player_001')['score'] = str(int(self.nounWithId('player_001')['score']) + 5)"
+        },
+        {
+            "id": "script_alien_behavior",
+            "code": "if 'dialog_state' not in self.nounWithId('alien_001'): self.nounWithId('alien_001')['dialog_state'] = 'initial'"
+        },
+        {
+            "id": "script_cave_entry",
+            "code": "if self.roomsContainingNounWithId('player_001')[0]['lit'] == 'false' and 'zorbonian_crystal_001' in self.roomsContainingNounWithId('player_001')[0]['obvious_nouns']:\n    self.sendNotificationToNoun('A faintly glowing crystal lies on the ground.', self.nounWithId('player_001'))"
+        },
+        {
+            "id": "script_hostile_behavior",
+            "code": "alien = self.nounWithId('hostile_alien_001')\nif 'turns_active' not in alien:\n    alien['turns_active'] = '0'\nalien['turns_active'] = str(int(alien['turns_active']) + 1)\nplayer_room = self.roomsContainingNounWithId('player_001')[0]['id']\nalien_room = self.roomsContainingNounWithId('hostile_alien_001')[0]['id']\nif alien['alive'] == 'true' and player_room == alien_room:\n    self.sendNotificationToNoun('A hostile alien snarls at you from the shadows!', self.nounWithId('player_001'))"
+        },
+        {
+            "id": "script_alien_death",
+            "code": "self.sendNotificationToNoun('You slice through the hostile alien with the laser cutter! It collapses, lifeless.', self.nounWithId('player_001'))\nself.nounWithId('player_001')['score'] = str(int(self.nounWithId('player_001')['score']) + 10)"
+        },
+        {
+            "id": "script_global_logic",
+            "code": "if self.nounWithId('generator_001')['on'] == 'true':\n    self.setLitInRoomWithId('base_001', True)\nelse:\n    self.setLitInRoomWithId('base_001', False)\nif 'zorbonian_crystal_001' in self.nounWithId('player_001')['inventory']:\n    current_room = self.roomsContainingNounWithId('player_001')[0]['id']\n    self.setLitInRoomWithId(current_room, True)\nfor noun in self.nouns:\n    if noun['playable'] == 'true' and int(noun['turns_taken']) >= int(noun['turns_allowed']):\n        noun['game_state'] = 'finished_lost'\n        self.sendNotificationToNoun('Time runs out. You’re stranded forever.', noun)"
+        },
+        {
+            "id": "script_move",
+            "code": "self.moveNounWithIdThroughExit('${SOURCE_NOUN_ID}', '${VERB_ID}')"
+        },
+        {
+            "id": "script_take",
+            "code": "self.addNounWithIdToInventoryOfNounWithId('${TARGET_NOUN_ID}', '${SOURCE_NOUN_ID}'); self.removeNounWithIdFromRoomWithId('${TARGET_NOUN_ID}', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id']) if self.nounWithId('${TARGET_NOUN_ID}')['big'] == 'false' else self.sendNotificationToNoun('That’s too big to carry!', self.nounWithId('${SOURCE_NOUN_ID}'))"
+        },
+        {
+            "id": "script_drop",
+            "code": "self.removeNounWithIdFromInventoryOfNounWithId('${TARGET_NOUN_ID}', '${SOURCE_NOUN_ID}'); self.addNounWithIdToRoomWithId('${TARGET_NOUN_ID}', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id'])"
+        },
+        {
+            "id": "script_use",
+            "code": "if '${TARGET_NOUN_ID}' == 'laser_cutter_001':\n    command = '${TARGET_NOUN_STRING}'.lower()\n    if 'on alien' in command or 'on hostile alien' in command:\n        target_id = 'hostile_alien_001'\n        if 'laser_cutter_001' in self.nounWithId('player_001')['inventory'] and self.nounWithId('laser_cutter_001')['on'] == 'true':\n            self.nounWithId('hostile_alien_001')['alive'] = 'false'\n            self.sendNotificationToNoun('You slice through the hostile alien with the laser cutter! It collapses, lifeless.', self.nounWithId('player_001'))\n            self.nounWithId('player_001')['score'] = str(int(self.nounWithId('player_001')['score']) + 10)\n        else:\n            self.sendNotificationToNoun('You need a powered laser cutter to attack the hostile alien.', self.nounWithId('player_001'))\n    else:\n        if 'zorbonian_crystal_001' in self.nounWithId('player_001')['inventory']:\n            if self.nounWithId('laser_cutter_001')['on'] == 'false':\n                self.nounWithId('laser_cutter_001')['on'] = 'true'\n                self.sendNotificationToNoun('The laser cutter hums to life, powered by the crystal.', self.nounWithId('player_001'))\n            else:\n                self.nounWithId('laser_cutter_001')['on'] = 'false'\n                self.sendNotificationToNoun('The laser cutter powers down.', self.nounWithId('player_001'))\n        else:\n            self.sendNotificationToNoun('The laser cutter needs a power source, like a Zorbonian crystal.', self.nounWithId('player_001'))\nelse:\n    self.switchNounWithId('${TARGET_NOUN_ID}')"
+        },
+        {
+          "id": "script_open",
+          "code": "if '${TARGET_NOUN_STRING}' == 'chest' or '${TARGET_NOUN_ID}' == 'locked_chest_001':\n    if 'laser_cutter_001' in self.nounWithId('player_001')['inventory'] and self.nounWithId('laser_cutter_001')['on'] == 'true':\n        self.sendNotificationToNoun('You slice open the chest with the laser cutter, revealing an engine part.', self.nounWithId('player_001'))\n        self.addNounWithIdToRoomWithId('engine_part_001', self.roomsContainingNounWithId('locked_chest_001')[0]['id'])\n        self.removeNounWithIdFromRoomWithId('locked_chest_001', self.roomsContainingNounWithId('player_001')[0]['id'])\n    else:\n        self.sendNotificationToNoun('You need a powered laser cutter to open the chest.', self.nounWithId('player_001'))\nelif '${TARGET_NOUN_STRING}' == 'door' or '${TARGET_NOUN_ID}' == 'locked_door_001':\n    if 'base_key_001' in self.nounWithId('player_001')['inventory'] and self.nounWithId('generator_001')['on'] == 'true':\n        self.sendNotificationToNoun('You unlock the door with the base key. It slides open as the generator hums.', self.nounWithId('player_001'))\n        self.removeNounWithIdFromRoomWithId('locked_door_001', self.roomsContainingNounWithId('player_001')[0]['id'])\n        self.roomWithId('base_001')['obvious_exits'] = 'up, south'\n        self.roomWithId('base_001')['exit_south'] = 'spaceship_001'\n    else:\n        self.sendNotificationToNoun('The door is locked. You need a key and power from the generator.', self.nounWithId('player_001'))\nelse:\n    self.sendNotificationToNoun('You can’t open that.', self.nounWithId('player_001'))"
+        },
+        {
+          "id": "script_give",
+          "code": "item_id = self.nounIdWithShortDesc('${TARGET_NOUN_STRING}')\nif item_id == 'zorbonian_crystal_001' and 'alien_001' in self.roomsContainingNounWithId('player_001')[0]['obvious_nouns'] and item_id in self.nounWithId('player_001')['inventory']:\n    self.sendNotificationToNoun('The alien says: \\\"Thank you! Take this key.\\\"', self.nounWithId('player_001'))\n    self.addNounWithIdToInventoryOfNounWithId('base_key_001', 'player_001')\n    self.removeNounWithIdFromInventoryOfNounWithId('zorbonian_crystal_001', 'player_001')\n    self.addNounWithIdToRoomWithId('zorbonian_crystal_001', self.roomsContainingNounWithId('alien_001')[0]['id'])\n    self.nounWithId('alien_001')['dialog_state'] = 'gave_key'\nelse:\n    self.sendNotificationToNoun('You need a Zorbonian crystal and the alien must be present.', self.nounWithId('player_001'))"
+        },
+        {
+            "id": "script_kill",
+            "code": "target_id = self.nounIdWithShortDesc('${TARGET_NOUN_STRING}')\nif target_id == 'hostile_alien_001':\n    if 'laser_cutter_001' in self.nounWithId('${SOURCE_NOUN_ID}')['inventory'] and self.nounWithId('laser_cutter_001')['on'] == 'true':\n        self.nounWithId('hostile_alien_001')['alive'] = 'false'\n        self.sendNotificationToNoun('You slice through the hostile alien with the laser cutter! It collapses, lifeless.', self.nounWithId('${SOURCE_NOUN_ID}'))\n        self.nounWithId('${SOURCE_NOUN_ID}')['score'] = str(int(self.nounWithId('${SOURCE_NOUN_ID}')['score']) + 10)\n    else:\n        self.sendNotificationToNoun('You need a powered laser cutter to kill the hostile alien.', self.nounWithId('${SOURCE_NOUN_ID}'))\nelse:\n    self.sendNotificationToNoun('You can’t kill that.', self.nounWithId('${SOURCE_NOUN_ID}'))"
+        },
+        {
+            "id": "script_inventory",
+            "code": "for itemId in self.nounWithId('${SOURCE_NOUN_ID}')['inventory']: self.sendNotificationToNoun(self.nounWithId(itemId)['short_desc'], self.nounWithId('${SOURCE_NOUN_ID}'))"
+        },
+        {
+            "id": "script_look",
+            "code": "self.lookAtNounStringFromNounWithId('${TARGET_NOUN_STRING}', '${SOURCE_NOUN_ID}')"
+        },
+        {
+            "id": "script_quit",
+            "code": "self.nounWithId('${SOURCE_NOUN_ID}')['game_state'] = 'quitting'"
+        },
+        {
+            "id": "script_talk",
+            "code": "if '${TARGET_NOUN_ID}' == 'alien_001':\n    state = self.nounWithId('alien_001')['dialog_state']\n    if state == 'initial':\n        self.sendNotificationToNoun('The alien says: \"Greetings, traveler. Bring me a Zorbonian crystal for my help.\"', self.nounWithId('${SOURCE_NOUN_ID}'))\n        self.nounWithId('alien_001')['dialog_state'] = 'awaiting_crystal'\n    elif state == 'awaiting_crystal':\n        if 'zorbonian_crystal_001' in self.nounWithId('${SOURCE_NOUN_ID}')['inventory']:\n            self.sendNotificationToNoun('The alien says: \"Thank you! Take this key.\"', self.nounWithId('${SOURCE_NOUN_ID}'))\n            self.addNounWithIdToInventoryOfNounWithId('base_key_001', '${SOURCE_NOUN_ID}')\n            self.removeNounWithIdFromInventoryOfNounWithId('zorbonian_crystal_001', '${SOURCE_NOUN_ID}')\n            self.addNounWithIdToRoomWithId('zorbonian_crystal_001', self.roomsContainingNounWithId('alien_001')[0]['id'])\n            self.nounWithId('alien_001')['dialog_state'] = 'gave_key'\n        else:\n            self.sendNotificationToNoun('The alien says: \"I need that crystal.\"', self.nounWithId('${SOURCE_NOUN_ID}'))"
+        },
+        {
+          "id": "script_apply",
+          "code": "command = '${TARGET_NOUN_STRING}'; parts = command.split(' on '); if len(parts) == 2: item_string = parts[0].strip(); target_string = parts[1].strip(); item_id = self.nounIdWithShortDesc(item_string); target_id = self.nounIdWithShortDesc(target_string); if item_id and target_id: if item_id in self.nounWithId('${SOURCE_NOUN_ID}')['inventory']: if target_id in self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['obvious_nouns']: if item_id == 'laser_cutter_001' and target_id == 'locked_door_001' and self.nounWithId('laser_cutter_001')['on'] == 'true': self.sendNotificationToNoun('You cut through the door with the laser cutter.', self.nounWithId('${SOURCE_NOUN_ID}')); self.removeNounWithIdFromRoomWithId('locked_door_001', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id']); self.roomWithId('base_001')['obvious_exits'] = 'up, south'; self.roomWithId('base_001')['exit_south'] = 'spaceship_001'; elif item_id == 'laser_cutter_001' and target_id == 'locked_chest_001' and self.nounWithId('laser_cutter_001')['on'] == 'true': self.sendNotificationToNoun('You open the chest, revealing an engine part.', self.nounWithId('${SOURCE_NOUN_ID}')); self.addNounWithIdToRoomWithId('engine_part_001', self.roomsContainingNounWithId('locked_chest_001')[0]['id']); self.removeNounWithIdFromRoomWithId('locked_chest_001', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id']); elif item_id == 'base_key_001' and target_id == 'locked_door_001' and self.nounWithId('generator_001')['on'] == 'true': self.sendNotificationToNoun('You unlock the door with the base key. It slides open.', self.nounWithId('${SOURCE_NOUN_ID}')); self.removeNounWithIdFromRoomWithId('locked_door_001', self.roomsContainingNounWithId('${SOURCE_NOUN_ID}')[0]['id']); self.roomWithId('base_001')['obvious_exits'] = 'up, south'; self.roomWithId('base_001')['exit_south'] = 'spaceship_001'; else: self.sendNotificationToNoun('Nothing happens.', self.nounWithId('${SOURCE_NOUN_ID}')); else: self.sendNotificationToNoun('The target isn’t here.', self.nounWithId('${SOURCE_NOUN_ID}')); else: self.sendNotificationToNoun('You don’t have that item.', self.nounWithId('${SOURCE_NOUN_ID}')); else: self.sendNotificationToNoun('Invalid item or target.', self.nounWithId('${SOURCE_NOUN_ID}')); else: self.sendNotificationToNoun('Usage: apply [item] on [target]', self.nounWithId('${SOURCE_NOUN_ID}'))"
+        },
+        {
+            "id": "script_launch",
+            "code": "if self.roomsContainingNounWithId('player_001')[0]['id'] == 'spaceship_001':\n    required_parts = ['engine_part_001', 'navigation_module_001', 'fuel_cell_001']\n    all_parts_present = all(part in self.nounWithId('player_001')['inventory'] for part in required_parts)\n    if all_parts_present:\n        self.nounWithId('player_001')['game_state'] = 'finished_won'\n        self.sendNotificationToNoun('You launch the spaceship and escape Zorbon!', self.nounWithId('player_001'))\n    else:\n        self.sendNotificationToNoun('You need all parts to launch: engine part, navigation module, and fuel cell.', self.nounWithId('player_001'))\nelse:\n    self.sendNotificationToNoun('You can only launch from the spaceship.', self.nounWithId('player_001'))"
+        }
+    ]
+}
